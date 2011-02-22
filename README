@@ -1,0 +1,4 @@
+Used to connect to a Magento install with Java:
+
+1. Edit pom.xml, set property magento.host to your magento install
+2. Run 'mvn package'
