@@ -1,4 +1,34 @@
 Used to connect to a Magento install with Java:
 
+Note: This project is not intended to be a completed API for Magento, it's just a starting
+point.
+
+To Build:
+
 1. Edit pom.xml, set property magento.host to your magento install
 2. Run 'mvn package'
+
+To Use:
+
+import com.magi.magento.domain.OrderStatus;
+import com.magi.magento.service.OrderService;
+import java.net.URL;
+
+public class TestMagento {
+
+    public static void main(String[] args) {
+        
+        final URL magentoUrl = new URL(args[0]);
+        final String user = args[1];
+        final String password = args[2];
+        final OrderService orderService = new OrderService(magentoUrl, user, password);
+        
+        // list sales orders by status
+        final SalesOrderEntity[] newSalesOrders = orderService.listSalesOrdersByStatus(OrderStatus.New);
+
+        // get order details
+        final String orderId = args[3];
+        final SalesOrderEntity salesOrder = orderService.salesOrderInfo(orderId);
+
+    }
+}
